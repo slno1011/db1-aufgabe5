@@ -56,26 +56,26 @@ public class Buchung {
   }
 
   @Column(name = "plaetze")
-  private int seats;
+  private int plaetze;
 
-  public int getSeats() {
-    return seats;
+  public int getPlaetze() {
+    return plaetze;
   }
 
-  public void setSeats(int seats) {
-    if (seats >= 1)
-      this.seats = seats;
+  public void setPlatze(int plaetze) {
+    if (plaetze >= 1)
+      this.plaetze = plaetze;
   }
 
   @Column(name = "datum")
   @Temporal(TemporalType.DATE)
-  private Date date;
+  private Date datum;
 
-  public Date getDate() {
-    return date;
+  public Date getDatum() {
+    return datum;
   }
 
-  public void setDate(Date date) {
-    this.date = date;
+  public void setDatum(Date datum) {
+    this.datum = datum;
   }
 }

@@ -32,26 +32,26 @@ public class JPAApplication {
 		Buchung kunde1buchung1 = new Buchung();
 		kunde1buchung1.setKunde(kunde1);
 		kunde1buchung1.setFlug(flug1);
-		kunde1buchung1.setSeats(2);
-		kunde1buchung1.setDate(new Date(System.currentTimeMillis()));
+		kunde1buchung1.setPlatze(2);
+		kunde1buchung1.setDatum(new Date(System.currentTimeMillis()));
 
 		Buchung kunde1buchung2 = new Buchung();
 		kunde1buchung2.setKunde(kunde1);
 		kunde1buchung2.setFlug(flug2);
-		kunde1buchung2.setSeats(2);
-		kunde1buchung2.setDate(new Date(System.currentTimeMillis()));
+		kunde1buchung2.setPlatze(2);
+		kunde1buchung2.setDatum(new Date(System.currentTimeMillis()));
 
 		Buchung kunde2buchung1 = new Buchung();
 		kunde2buchung1.setKunde(kunde2);
 		kunde2buchung1.setFlug(flug2);
-		kunde2buchung1.setSeats(2);
-		kunde2buchung1.setDate(new Date(System.currentTimeMillis()));
+		kunde2buchung1.setPlatze(2);
+		kunde2buchung1.setDatum(new Date(System.currentTimeMillis()));
 
 		Buchung kunde2buchung2 = new Buchung();
 		kunde2buchung2.setKunde(kunde2);
 		kunde2buchung2.setFlug(flug3);
-		kunde2buchung2.setSeats(2);
-		kunde2buchung2.setDate(new Date(System.currentTimeMillis()));
+		kunde2buchung2.setPlatze(2);
+		kunde2buchung2.setDatum(new Date(System.currentTimeMillis()));
 
 		man.persist(kunde1);
 		man.persist(kunde2);
@@ -66,20 +66,21 @@ public class JPAApplication {
 		// Bis hier Aufgabe 5.2
 
 		man.getTransaction().commit();
-	
+		man.getTransaction().begin();
 		
 		String nachnameZumSuchen = "Zufall";
-		Iterator resultSet = man.createQuery("SELECT Buchung FROM Buchung b JOIN Kunde k ON k.kundeID = b.kundeID WHERE k.nachname = 'Zufall'").getResultList().iterator();
+		Iterator resultSet = man.createQuery("SELECT b.id, b.plaetze, CAST(b.datum AS string), k.vorname, k.nachname, b.flug.id, b.kunde.kundeID FROM Buchung b JOIN Kunde k ON k.kundeID = b.kunde.kundeID WHERE k.nachname = :nachname").setParameter("nachname", nachnameZumSuchen).getResultList().iterator();
 		while (resultSet.hasNext()) {
 			Object[] row = (Object[]) resultSet.next();
 			int plaetze = (int) row[1];
 			String datum = (String) row[2];
-			String firstName = (String) row[3];
-			String lastName = (String) row[4];
+			String vorname = (String) row[3];
+			String nachname = (String) row[4];
 			int flugId = (int) row[5];
-			System.out.printf("Plaetze: %d, Datum: %s, Vorname: %s, Nachname: %s, Flug: %d\n", plaetze, datum, firstName,
-					lastName, flugId);
+			System.out.printf("Plaetze: %d, Datum: %s, Vorname: %s, Nachname: %s, Flug: %d\n", plaetze, datum, vorname,
+					nachname, flugId);
 		}
+		
 		man.getTransaction().commit();
 		man.close();
 	}
