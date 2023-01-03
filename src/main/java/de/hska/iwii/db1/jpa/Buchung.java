@@ -32,7 +32,7 @@ public class Buchung {
   }
 
   @ManyToOne
-  @JoinColumn(name = "flug-id")
+  @JoinColumn(name = "flugID")
   private Flug flug;
 
   public Flug getFlug() {
@@ -44,7 +44,7 @@ public class Buchung {
   }
 
   @ManyToOne
-  @JoinColumn(name = "kunde-id")
+  @JoinColumn(name = "kundeID")
   private Kunde kunde;
 
   public Kunde getKunde() {

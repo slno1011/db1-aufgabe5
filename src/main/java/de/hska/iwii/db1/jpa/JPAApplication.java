@@ -2,6 +2,7 @@ package de.hska.iwii.db1.jpa;
 
 import java.sql.Time;
 import java.sql.Date;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,6 +65,21 @@ public class JPAApplication {
 
 		// Bis hier Aufgabe 5.2
 
+		man.getTransaction().commit();
+	
+		
+		String nachnameZumSuchen = "Zufall";
+		Iterator resultSet = man.createQuery("SELECT Buchung FROM Buchung b JOIN Kunde k ON k.kundeID = b.kundeID WHERE k.nachname = 'Zufall'").getResultList().iterator();
+		while (resultSet.hasNext()) {
+			Object[] row = (Object[]) resultSet.next();
+			int plaetze = (int) row[1];
+			String datum = (String) row[2];
+			String firstName = (String) row[3];
+			String lastName = (String) row[4];
+			int flugId = (int) row[5];
+			System.out.printf("Plaetze: %d, Datum: %s, Vorname: %s, Nachname: %s, Flug: %d\n", plaetze, datum, firstName,
+					lastName, flugId);
+		}
 		man.getTransaction().commit();
 		man.close();
 	}

@@ -11,9 +11,9 @@ import jakarta.persistence.GenerationType;
 @Table(name = "kunde")
 public class Kunde {
 	@Id
-	@Column(name = "kunde-id")
+	@Column(name = "kundeID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int kundeid;
+	private int kundeID;
 
 	@Column(name = "vorname")
 	private String vorname;
@@ -31,8 +31,8 @@ public class Kunde {
 		this.email = email;
 	}
 
-	public void setKundeID(int kundeid) { this.kundeid = kundeid; }
-	public int getKundeID() { return this.kundeid; }
+	public void setKundeID(int kundeID) { this.kundeID = kundeID; }
+	public int getKundeID() { return this.kundeID; }
 
 	public void setVorname(String vorname) { this.vorname = vorname; }
 	public String getVorname() { return this.vorname; }
