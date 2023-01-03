@@ -62,6 +62,8 @@ public class JPAApplication {
 		man.persist(kunde2buchung1);
 		man.persist(kunde2buchung2);
 
+		// Bis hier Aufgabe 5.2
+
 		man.getTransaction().commit();
 		man.close();
 	}
